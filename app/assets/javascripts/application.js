@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require metismenu/dist/metisMenu.min.js
 //= require bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js
 //= require datatables.net/js/jquery.dataTables.js
 //= require datatables.net-bs/js/dataTables.bootstrap.js
