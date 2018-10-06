@@ -12,9 +12,9 @@
         = f.input_field :phone_number, class: 'form-control'
       = f.input :birthday, as: :string, input_html: { class: 'birthday_input', value: in_date_format(current_customer.birthday) }
       = f.fields_for :address do |af|
-        = af.input :city, required: false, input_html: { value: current_customer.address['city'] }
-        = af.input :district, required: false, input_html: { value: current_customer.address['district'] }
-        = af.input :ward, required: false, input_html: { value: current_customer.address['ward'] }
-        = af.input :street, required: false, input_html: { value: current_customer.address['street'] }
+        = af.input :city, required: false, input_html: { value: current_customer.address.try(:[], 'city') }
+        = af.input :district, required: false, input_html: { value: current_customer.address.try(:[], 'district') }
+        = af.input :ward, required: false, input_html: { value: current_customer.address.try(:[], 'ward') }
+        = af.input :street, required: false, input_html: { value: current_customer.address.try(:[], 'street') }
         = f.button :submit, 'Update Profile', class: 'btn btn-primary'
   .col-md-4.col-sm-4

@@ -20,11 +20,6 @@ class ApplicationController < ActionController::Base
 
   end
 
-  protected
-    def after_sign_in_path_for(resource)
-      admins_root_path if resource.class.to_s == 'Admin'
-      root_path if resource.class.to_s == 'Customer'
-    end
   private
 
   def page_params

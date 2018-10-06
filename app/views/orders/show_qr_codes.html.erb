@@ -1,7 +1,7 @@
 <div style="text-align: center;">
   <% @order.order_details.each do |detail| %>
     <h3><%= detail.match.name %></h3>
-    <h4><%= detail.hash_key %></h4>
+    <h4><%= "#{detail.hash_key} - ( #{detail.ticket_type.code} / #{detail.quantity} ticket(s) )" %></h4>
     <%= image_tag detail.qr_code_file_name %>
   <% end %>
 </div>
