@@ -2,7 +2,7 @@
 class OrdersController < ApplicationController
   include SeasonsHelper
   before_action :authenticate_admin!, except: [:customer_orders, :show_qr_codes, :create_customer_order]
-  before_action :authenticate_customer!, only: [:customer_orders, :create_customer_order]
+  before_action :authenticate_customer!, only: [:customer_orders, :show_qr_codes, :create_customer_order]
   before_action :set_order, only: %i[show edit update destroy logs]
   after_action :update_order, only: %i[create update]
   layout 'blank', only: [:customer_orders, :create_customer_order]
@@ -162,7 +162,6 @@ class OrdersController < ApplicationController
   end
 
   def authenticate_customer!
-    flash[:info] = 'Please sign in before to buy tickets !'
-    redirect_to root_path unless customer_signed_in?
+    redirect_to root_path, notice: 'Please sign in before to buy tickets !' unless customer_signed_in?
   end
 end
