@@ -134,7 +134,7 @@ class Order < ApplicationRecord
   private
 
   def order_details_existence
-    errors.add(:base, 'Must have at least 1 order details') if order_details.empty?
+    errors.add(:base, 'You must have at least 1 order details') if order_details.empty?
   end
 
   def never_expires?

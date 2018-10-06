@@ -1,7 +1,7 @@
 .row
   .col-md-4
   .col-md-4#orders_form
-    = simple_nested_form_for(@order) do |f|
+    = simple_nested_form_for(@order, url: create_customer_order_orders_path, method: :post) do |f|
       .panel.panel-warning
         .panel-heading Order
         .panel-body

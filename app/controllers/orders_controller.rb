@@ -1,10 +1,11 @@
 # rubocop:disable Metrics/ClassLength
 class OrdersController < ApplicationController
   include SeasonsHelper
-  before_action :authenticate_admin!, except: [:customer_orders, :create, :show_qr_codes]
+  before_action :authenticate_admin!, except: [:customer_orders, :show_qr_codes, :create_customer_order]
+  before_action :authenticate_customer!, only: [:customer_orders, :show_qr_codes, :create_customer_order]
   before_action :set_order, only: %i[show edit update destroy logs]
   after_action :update_order, only: %i[create update]
-  layout 'blank', only: [:customer_orders]
+  layout 'blank', only: [:customer_orders, :create_customer_order]
   def customer_orders
     @order = Order.new
     set_view_data
@@ -55,13 +56,19 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     set_view_data
     if create_service.execute
-      if current_admin.present?
-        redirect_to orders_path, notice: 'Order was successfully created.'
-      else
-        redirect_to root_path, notice: 'Order was successfully created.'
-      end
+      redirect_to orders_path, notice: 'Order was successfully created.'
     else
       render_create_new(format)
+    end
+  end
+
+  def create_customer_order
+    @order = Order.new(order_params)
+    set_view_data
+    if create_service.execute
+      redirect_to root_path, notice: 'Order was successfully created.'
+    else
+      render :customer_orders
     end
   end
 
@@ -152,5 +159,10 @@ class OrdersController < ApplicationController
       :purchased_date, :paid, :status, 
       order_details_attributes: %i[id ticket_type_id quantity unit_price match_id _destroy]
     )
+  end
+
+  def authenticate_customer!
+    flash[:info] = 'Please sign in before to buy tickets !'
+    redirect_to root_path unless customer_signed_in?
   end
 end

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
     collection do
       get :new_season_order, as: :new_season
+      post 'create_customer_order', to: 'orders#create_customer_order'
     end
   end
 
