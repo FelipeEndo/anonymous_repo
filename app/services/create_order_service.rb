@@ -19,7 +19,7 @@ class CreateOrderService
     @order.calculate_expired_at
     @order.save
     update_promotion
-    PushUnpaidOrderJob.set(wait_until: @order.expired_at - 10.hours).perform_later(@order)
+    # PushUnpaidOrderJob.set(wait_until: @order.expired_at - 10.hours).perform_later(@order)
     @order
   end
 
