@@ -7,7 +7,7 @@
         .panel-body
           .has-error
             = f.error :base
-          = f.input :customer_id, as: :hidden, input_html: { value: 1 }
+          = f.input :customer_id, as: :hidden, input_html: { value: current_customer.id }
           = f.input :phone_number, as: :integer, input_html: { value: current_customer.phone_number }
           = f.input :shipping_address, input_html: { value: @address }
           = f.input :promotion_code, input_html: { id: 'promotion_code', class: 'text-uppercase' }
@@ -24,7 +24,7 @@
             .panel-body
               .row
                 .col-md-12.col-sm-12
-                  = nf.input :match_id, collection: Match.upcoming.active.where(id: params[:match_id]), input_html: { id: 'match_select' }, label_method: :name_with_time, value_method: :id
+                  = nf.input :match_id, collection: Match.upcoming.active, selected: Match.find_by(id: params[:match_id]), input_html: { id: 'match_select' }, label_method: :name_with_time, value_method: :id
               .row
                 .col-md-4.col-sm-4
                   - ticket_type_options = nf.object.ticket_types.present? ? nf.object.ticket_types : @ticket_type_options
