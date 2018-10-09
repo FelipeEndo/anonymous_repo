@@ -71,9 +71,14 @@ class OrdersController < ApplicationController
 
   def create_customer_order
     @order = Order.new(order_params)
+    execute = create_service.execute
     set_view_data
-    if create_service.execute
-      redirect_to root_path, notice: 'Order was successfully created.'
+    if execute
+      if params[:commit] == "Place Order"
+        redirect_to my_orders_path, notice: 'Order was successfully placed.'
+      else
+        redirect_to request_purchase_path(order_id: execute.id, request_ip: '127.0.0.1')
+      end
     else
       render :customer_orders
     end

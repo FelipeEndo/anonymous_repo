@@ -2,18 +2,16 @@
 #
 # Table name: transaction_histories
 #
-#  id                  :integer          not null, primary key
-#  order_id            :integer
-#  customer_id         :integer
-#  request_ip          :string           not null
-#  key                 :string           not null
-#  status              :integer          not null
-#  amount              :decimal(, )      default(0.0), not null
-#  response            :hstore
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  opamount            :decimal(, )      default(0.0)
-#  discount_amount_123 :decimal(, )      default(0.0)
+#  id          :integer          not null, primary key
+#  order_id    :integer
+#  customer_id :integer
+#  request_ip  :string           not null
+#  key         :string           not null
+#  status      :integer          not null
+#  amount      :decimal(, )      default(0.0), not null
+#  response    :hstore
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #

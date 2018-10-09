@@ -7,9 +7,6 @@ class CreateOrderService
 
   # rubocop:disable Metrics/AbcSize
   def execute
-    # early return before merging details
-    create_season_order if @order.home_team_id
-
     return false unless @order.valid?
 
     # Avoid Postman send request from anonymous with different unit price
@@ -19,7 +16,6 @@ class CreateOrderService
     @order.calculate_expired_at
     @order.save
     update_promotion
-    # PushUnpaidOrderJob.set(wait_until: @order.expired_at - 10.hours).perform_later(@order)
     @order
   end
 

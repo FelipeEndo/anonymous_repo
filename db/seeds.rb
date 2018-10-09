@@ -52,10 +52,14 @@ pre.teams << Team.all
 cham.teams << Team.all
 puts 'Created Seasons & appended Teams'
 
-Match.create(season_id: pre.id, stadium_id: hnb_stdum.id, home_team_id: hnb.id, away_team_id: sgh.id, active: true, start_time: DateTime.current + 10.days)
-Match.create(season_id: pre.id, stadium_id: sgh_stdum.id, home_team_id: sgh.id, away_team_id: dnd.id, active: true, start_time: DateTime.current + 10.days)
-Match.create(season_id: cham.id, stadium_id: tlw_stdum.id, home_team_id: tlw.id, away_team_id: sgh.id, active: true, start_time: DateTime.current + 10.days)
-Match.create(season_id: cham.id, stadium_id: dnd_stdum.id, home_team_id: dnd.id, away_team_id: tlw.id, active: true, start_time: DateTime.current + 10.days)
+match = Match.new(season_id: pre.id, stadium_id: hnb_stdum.id, home_team_id: hnb.id, away_team_id: sgh.id, active: true, start_time: DateTime.current + 10.days)
+CreateMatchService.new.execute(match.attributes)
+match1 = Match.new(season_id: pre.id, stadium_id: sgh_stdum.id, home_team_id: sgh.id, away_team_id: dnd.id, active: true, start_time: DateTime.current + 10.days)
+CreateMatchService.new.execute(match1.attributes)
+match2 = Match.new(season_id: cham.id, stadium_id: tlw_stdum.id, home_team_id: tlw.id, away_team_id: sgh.id, active: true, start_time: DateTime.current + 10.days)
+CreateMatchService.new.execute(match2.attributes)
+match3 = Match.new(season_id: cham.id, stadium_id: dnd_stdum.id, home_team_id: dnd.id, away_team_id: tlw.id, active: true, start_time: DateTime.current + 10.days)
+CreateMatchService.new.execute(match3.attributes)
 puts 'Matches created !'
 
 

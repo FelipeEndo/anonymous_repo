@@ -15,6 +15,9 @@
             <% end %>
 
             <a class="w3-button w3-black w3-margin-bottom show_qr" style="margin-top: 10px;" data-href="<%= show_qr_codes_order_path(id: order.id) %>">Show QR</a>
+            <% unless order.paid %>
+              <%= link_to 'PAY', request_purchase_path(order_id: order.id, request_ip: '127.0.0.1'), method: :post, class: "w3-button w3-black w3-margin-bottom", style: "margin-top: 10px;" %>
+            <% end %>
           </div>
         </div>
       <% end %>

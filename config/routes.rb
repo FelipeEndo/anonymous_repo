@@ -72,12 +72,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'download/:id', to: 'csv_files#download', as: :csv_download
-  get 'qr_download/:id', to: 'qr_codes#download', as: :qr_download
-  get 'qr_codes', to: 'qr_codes#index', as: :qr_codes
-  get 'qr_generator', to: 'qr_codes#new_qr_generator', as: :qr_generator
-  post 'qr_generator', to: 'qr_codes#reference_qr_generator'
-  get 'qr_code/:team_id/ticket_types', to: 'qr_codes#team_ticket_types', format: 'json'
+  match 'request_purchase', to: 'payments#request_purchase', via: [:get, :post]
+  get 'complete_purchase', to: 'payments#complete_purchase'
 
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'

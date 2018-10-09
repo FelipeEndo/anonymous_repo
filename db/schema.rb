@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180927043351) do
+ActiveRecord::Schema.define(version: 20181009160117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -219,7 +219,6 @@ ActiveRecord::Schema.define(version: 20180927043351) do
 
   create_table "ticket_types", force: :cascade do |t|
     t.bigint "match_id", null: false
-    t.bigint "zone_id"
     t.integer "quantity", null: false
     t.string "code", null: false
     t.string "slug"
@@ -230,7 +229,6 @@ ActiveRecord::Schema.define(version: 20180927043351) do
     t.index ["match_id", "code"], name: "index_ticket_types_on_match_id_and_code", unique: true
     t.index ["match_id"], name: "index_ticket_types_on_match_id"
     t.index ["slug"], name: "index_ticket_types_on_slug", unique: true
-    t.index ["zone_id"], name: "index_ticket_types_on_zone_id"
   end
 
   create_table "transaction_histories", force: :cascade do |t|
@@ -243,8 +241,6 @@ ActiveRecord::Schema.define(version: 20180927043351) do
     t.hstore "response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "opamount", default: "0.0"
-    t.decimal "discount_amount_123", default: "0.0"
     t.index ["customer_id"], name: "index_transaction_histories_on_customer_id"
     t.index ["order_id"], name: "index_transaction_histories_on_order_id"
   end
@@ -277,7 +273,6 @@ ActiveRecord::Schema.define(version: 20180927043351) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "ticket_types"
   add_foreign_key "ticket_types", "matches"
-  add_foreign_key "ticket_types", "zones"
   add_foreign_key "transaction_histories", "customers"
   add_foreign_key "transaction_histories", "orders"
   add_foreign_key "zones", "stadiums"

@@ -4,7 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  match_id   :integer          not null
-#  zone_id    :integer
 #  quantity   :integer          not null
 #  code       :string           not null
 #  slug       :string
@@ -18,12 +17,10 @@
 #  index_ticket_types_on_match_id           (match_id)
 #  index_ticket_types_on_match_id_and_code  (match_id,code) UNIQUE
 #  index_ticket_types_on_slug               (slug) UNIQUE
-#  index_ticket_types_on_zone_id            (zone_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (match_id => matches.id)
-#  fk_rails_...  (zone_id => zones.id)
 #
 
 class TicketType < ApplicationRecord

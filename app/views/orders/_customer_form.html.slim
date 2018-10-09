@@ -24,7 +24,7 @@
             .panel-body
               .row
                 .col-md-12.col-sm-12
-                  = nf.input :match_id, collection: Match.upcoming.active, selected: Match.find_by(id: params[:match_id]), input_html: { id: 'match_select' }, label_method: :name_with_time, value_method: :id
+                  = nf.input :match_id, collection: Match.upcoming.active, input_html: { id: 'match_select' }, label_method: :name_with_time, value_method: :id
               .row
                 .col-md-4.col-sm-4
                   - ticket_type_options = nf.object.ticket_types.present? ? nf.object.ticket_types : @ticket_type_options
@@ -36,5 +36,6 @@
 
       = f.link_to_add "Browse Ticket", :order_details, data: {target: '#order_details'}, class: 'btn btn-warning'
       .text-right
-        = f.button :submit
+        = f.button :submit, "Place Order"
+        = f.button :submit, "Paying Online", style: 'margin-left: 10px;', class: "btn btn-info"
   .col-md-4
