@@ -7,7 +7,6 @@ class PaymentsController < ApplicationController
     order.update_attributes(sale_channel: '123Pay')
     @payment = payment
     if @payment.save
-      debugger
       create_order = create_payment_service.execute
     else
       redirect_to my_orders_path, notice: 'Your payment process is failed.'
