@@ -19,8 +19,7 @@ module OrdersHelper
     transaction_history = TransactionHistory.find_by(order_id: order.id)
     customer_link = guard_link(order.customer) { link_to order.customer.name, customer_path(order.customer) }
     if transaction_history
-      opamount = transaction_history.opamount ||= order.total_after_discount
-      discount = transaction_history.discount_amount_123 ||= 0
+      opamount = order.total_after_discount
     else
       discount = 0
       opamount = order.total_after_discount
